@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    width: 60%;
+    margin: 2em auto;
+    background-color: rgb(152, 197, 223);
+
+}
+
+table {
+    width: 95%;
+    font-family: serif;
+    text-align: left;
+    border-collapse: collapse
+}
+
+th {
+    padding-left: 2em;
+    margin: 0;
+    color: white;
+    height: 3em;
+    background-color: rgb(72, 14, 233);
+}
+tr .border-top-left{
+    border-top-left-radius: 1em;
+}
+tr .border-top-right{
+    border-top-right-radius: 1em;
+}
+tr .border-bottom-left{
+    border-bottom-left-radius: 1em;
+}
+tr .border-bottom-right{
+    border-bottom-right-radius: 1em;
+}
+td {
+    padding-left: 2em;
+    height: 3em;
+    background-color: white;
+}
+
+table, th, td {
+    margin: 1em auto;
+}
+
+.name {
+    width: 40%;
+}
+
+.age {
+    width: 15%;
+}
+
+.job {
+    width: 25%;
+}
+
+.location {
+    width: 25%;
+}
+tr:hover td{
+    background-color: rgb(236, 231, 231);
+    cursor:pointer;
+}

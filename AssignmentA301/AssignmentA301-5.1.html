@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Cho mảng có giá trị [1, 2, 3, 5, 3, 4, 56, 7, 3, 4, 6]</p>
+    <pre>
+    <script>
+        var arr = [1, 2, 3, 5, 3, 4, 56, 7, 3, 4, 6];
+        var sum = 0;
+        document.writeln("Viết hàm hiển thị danh sách các giá trị chẵn trong mảng và tổng các giá trị chẵn trong mảng");
+        valueEvenInArray(arr).forEach(element => {
+            document.write(element + " ");
+            sum += element;
+        })
+        document.writeln("<br>Sum:" + sum);
+
+
+        document.writeln("---------------------------------------------");
+        document.writeln("Viết hàm hiển thị danh sách các giá trị lẻ trong mảng và tổng các giá trị lẻ trong mảng");
+        sum = 0;
+        valueOddInArray(arr).forEach(element => {
+            document.write(element + " ");
+            sum += element;
+        })
+        document.writeln("<br>Sum:" + sum);
+
+
+        document.writeln("---------------------------------------------");
+        document.writeln("Viết hàm hiển thị danh sách các giá trị trong mảng ban đầu có giá trị nằm trong khoảng [a, b]. Trong đó, a và b nhập vào từ bàn phím và a ≥ b.");
+        valueInArrayBetweenValue(arr).forEach(element => {
+            document.write(element + " ");
+        });
+
+
+        document.writeln("<br>---------------------------------------------");
+        document.writeln("Sắp xếp theo thứ tự tăng dần cho  mảng")
+        displayArray(insertSort(arr));
+        document.writeln("<br>Sắp xếp theo thứ tự tăng dần cho số chẵn trong mảng")
+        displayArray(insertSort(valueEvenInArray(arr)));
+        document.writeln("<br>Sắp xếp theo thứ tự tăng dần cho số lẻ trong mảng")
+        displayArray(insertSort(valueOddInArray(arr)));
+
+        // Viết hàm trả về mảng các giá trị chẵn trong mảng
+        function valueEvenInArray(arr) {
+            var newArr = new Array();
+            arr.forEach(element => {
+                if (element % 2 == 0) {
+                    newArr.push(element);
+                }
+            });
+            return newArr;
+        }
+
+        // Viết hàm trả về mảng các giá trị lẻ trong mảng
+        function valueOddInArray(arr) {
+            var newArr = new Array();
+            arr.forEach(element => {
+                if (element % 2 != 0) {
+                    newArr.push(element);
+                }
+            });
+            return newArr;
+        }
+
+        // Viết hàm hiển thị danh sách các giá trị trong mảng ban đầu có giá trị nằm trong khoảng [a, b]. 
+        // Trong đó, a và b nhập vào từ bàn phím và a ≥ b.
+        function valueInArrayBetweenValue(arr) {
+            var a, b;
+            var newArr = new Array();
+            do {
+                a = prompt("Nhap a =");
+                b = prompt("Nhap b =");
+            } while (isNaN(parseInt(a)) || isNaN(parseInt(b)) || parseInt(a) < parseInt(b));
+            document.writeln("Trong khoang " + b + " - " + a);
+            arr.forEach(element => {
+                if (element >= b && element <= a) {
+                    newArr.push(element);
+                }
+            });
+            return newArr;
+        }
+
+        function insertSort(arr) {
+            var temp;
+            for (var i = 0; i < arr.length - 1; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {
+                        temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        function displayArray(arr) {
+            arr.forEach(element => {
+                document.write(element + " ");
+            })
+        }
+    </script>
+    </pre>
+</body>
+
+</html>

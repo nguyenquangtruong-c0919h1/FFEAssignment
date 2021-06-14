@@ -1,0 +1,31 @@
+.bg-blue {
+    background-color: rgba(55, 61, 153, 0.94);
+    height: 65px;
+}
+
+.bg-blue h2 {
+    display: inline-block;
+    color: white;
+}
+
+.float-right {
+    margin-top: 0.35em;
+}
+
+.fa-pen {
+    color: yellow;
+    margin-right: 1.5em;
+}
+
+.fa-trash {
+    color: rgb(216, 12, 12);
+}
+li a,.color-secondary{
+    color: rgb(100, 98, 98) !important;
+}
+.page-item.active .page-link {
+    color: white !important;
+}
+.table{
+    margin-top: 1em;
+}

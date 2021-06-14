@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <p>I- Kiểm tra giá trị nhập vào đúng định dạng của credit card không</p>
+        <label for="">Credit card</label>
+        <input id="credit-card" type="text" onblur="isCreditCard()">
+        <span class="error-credit-card"></span>
+    </div>
+    <div>
+        <p>II- Kiểm tra có phải là số không khi nhập vào</p>
+        <label for="">Nhập vào giá trị</label>
+        <input type="text" id="checkNumber" onblur="isNumber()">
+        <span class="error-number"></span>
+    </div>
+    <div>
+        <p>III- Kiểm tra giá trị nhập vào phải email không</p>
+        <label for="">Email</label>
+        <input type="text" id="checkEmail" onblur="isEmail()">
+        <span class="error-email"></span>
+    </div>
+    <div>
+        <p>IV- Kiểm tra giá trị nhập vào phải URL không</p>
+        <label for="">URL</label>
+        <input type="text" id="checkUrl" onblur="isUrl()">
+        <span class="error-url"></span>
+    </div>
+    <div>
+        <p>V- Chỉ chứa ký tự alphabet và số, không chứa các ký tự đặc biệt.</p>
+        <label for="">URL</label>
+        <input type="text" id="checkAlphabetNumber" onblur="areAlphabetNumber()">
+        <span class="error-alphabet-number"></span>
+    </div>
+    <script>
+        var regex_credit_card = /^[0-9]{2}$/;
+        var regex_number = /^[0-9]$/;
+        var regex_email = /^[a-zA-Z0-9._-]{2,}@[a-z]+\.[a-z]{2,4}$/;
+        var regex_url = /^((http:\/\/)|(https:\/\/)|)(www\.)[a-zA-Z0-9]{2,}\.[a-z]{2,6}(\/|)$/;
+        var regex_alphabet_number = /^[a-zA-Z0-9]{1,}/;
+
+        function isCreditCard() {
+            var creaditCard = document.getElementById("credit-card").value;
+            var messageErrorCreditCard = document.querySelector("span.error-credit-card");
+            messageErrorCreditCard.innerText = "";
+            if (!regex_credit_card.test(creaditCard)) {
+                messageErrorCreditCard.innerText = "Nhập sai, chuỗi chỉ chứa giá trị có độ dài 16 số";
+            }
+        }
+
+        function isNumber() {
+            var number = document.getElementById("checkNumber").value;
+            var messageNumber = document.querySelector("span.error-number");
+            if (!regex_number.test(number)) {
+                messageNumber.innerText = "Giá trị này không phải là số";
+            } else {
+                messageNumber.innerText = "Giá trị này là số";
+            }
+        }
+
+        function isEmail() {
+            var email = document.getElementById("checkEmail").value;
+            var messageErrorEmail = document.querySelector("span.error-email");
+            messageErrorEmail.innerText = "";
+            if (!regex_email.test(email)) {
+                messageErrorEmail.innerText = "Nhập sai, vui lòng nhập đúng định dạng email";
+            }
+        }
+
+        function isUrl() {
+            var url = document.getElementById("checkUrl").value;
+            var messageErrorUrl = document.querySelector("span.error-url");
+            messageErrorUrl.innerText = "";
+            if (!regex_url.test(url)) {
+                messageErrorUrl.innerText = "Nhập sai định dạng Url";
+            }
+        }
+
+        function areAlphabetNumber() {
+            var alphabetNumber = document.getElementById("checkAlphabetNumber").value;
+            var messageErrorAlphabetNumber = document.querySelector("span.error-alphabet-number");
+            messageErrorAlphabetNumber.innerText = "";
+            if (!regex_alphabet_number.test(alphabetNumber)) {
+                messageErrorAlphabetNumber.innerText = "Nhập sai, giá trị nhập vào chỉ chứa chứa chữ và số";
+            }
+        }
+    </script>
+</body>
+
+</html>

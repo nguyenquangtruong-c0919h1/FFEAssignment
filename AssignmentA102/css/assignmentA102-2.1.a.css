@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 330px;
+    background-color: rgb(231, 171, 6);
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 100%;
+    font-family: serif;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.content-column {
+    padding-left: 2em;
+    padding-right: 1em;
+    width: 50%;
+}
+
+h2 {
+    color: white;
+    text-transform: uppercase;
+}
+
+.content-column p {
+    font-size: 17px;
+}
+
+.form {
+    width: 50%;
+}
+
+/* Form */
+
+.name-email {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.border-0 {
+    border: 0;
+}
+.margin-right-2{
+    margin-right: 2em;
+}   
+
+.name {
+    width: 46%;
+    height: 2.3em;
+}
+
+.email {
+    width: 46%;
+    height: 2.3em;
+}
+
+.subject {
+    width: 96%;
+    height: 2.3em;
+    margin-bottom: 1em;
+    margin-right: 2em;
+}
+
+.your-message {
+    width: 96%;
+    height: 4em;
+}
+
+button{
+    margin-top: 1.5em;
+    width: 35%;
+    height: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(77, 70, 70);
+    border: 0;
+}

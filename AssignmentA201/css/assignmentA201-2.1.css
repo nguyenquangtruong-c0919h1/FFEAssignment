@@ -1,0 +1,9 @@
+.row {
+    height: 40px;
+    text-align: center;
+    margin: 2em auto;
+}
+
+p {
+    padding-top: 10px;
+}

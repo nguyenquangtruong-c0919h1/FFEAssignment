@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssignmnetA301-6.2</title>
+    <link rel="stylesheet" href="css/assignmentA301-6.2.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/all.js"></script>
+
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>To Do List</h1>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control set-name" placeholder="Name...">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-info" onclick="validateForm()">Add Item</button>
+            </div>
+        </div>
+
+        <div class="form" id="form">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-outline-info" onclick="clearItems()">Clear Items</button>
+        </div>
+    </div>
+
+    <script>
+        var idItem = 0;
+        var idStructureItem = 0;
+        var btnAddItem = document.querySelector(".input-group button.btn");
+        //AddEventListen
+        function validateForm() {
+            var getName = document.querySelector("input.set-name");
+            if (getName.value != "" || getName.value == null) {
+                addStuctureItem();
+                addValueItem();
+            }
+            getName.value = "";
+        }
+
+        function addStuctureItem() {
+            idStructureItem++;
+            var getForm = document.querySelector(".form");
+            var createCol = document.createElement("div");
+            createCol.setAttribute("class", "row todo-item-" + idStructureItem);
+            getForm.appendChild(createCol);
+        }
+
+        function addValueItem() {
+            var getName = document.querySelector("input.set-name").value;
+            idItem++;
+            var getTodoItem = document.querySelector(".row.todo-item-" + idStructureItem);
+            var newP = document.createElement("p");
+            newP.setAttribute("class", "col-10");
+            newP.setAttribute("id", "todo-item-" + idItem);
+            newP.innerHTML = getName;
+            getTodoItem.appendChild(newP);
+
+            var getTodoItem = document.querySelector(".row.todo-item-" + idStructureItem);
+            var creatGroupIcon = document.createElement("div");
+            creatGroupIcon.setAttribute("class", "col-2");
+            getTodoItem.appendChild(creatGroupIcon);//Thêm thẻ div.float-right vào trong thẻ div.todo-item
+            //Tao icon remove
+            var createButtonRemove = document.createElement("button");
+            createButtonRemove.setAttribute("class", "btn-remove-icon float-right");
+            createButtonRemove.setAttribute("onclick", "deleteItem(" + "\"todo-item-" + idItem + "\")");
+            creatGroupIcon.appendChild(createButtonRemove);
+            var createRemoveIcon = document.createElement("i");
+            createRemoveIcon.setAttribute("class", "far fa-trash-alt");
+            createButtonRemove.appendChild(createRemoveIcon);//Thêm thẻ i.far.fa-trash-alt vào trong thẻ div.float-right
+            //Tao icon Remove
+            var createButtonEdit = document.createElement("button");
+            createButtonEdit.setAttribute("class", "btn-edit-icon float-right");
+            createButtonEdit.setAttribute("onclick", "editItem(" + "\"todo-item-" + idItem + "\")");
+            creatGroupIcon.appendChild(createButtonEdit);
+            var createEditIcon = document.createElement("i");
+            createEditIcon.setAttribute("class", "far fa-edit");
+            createButtonEdit.appendChild(createEditIcon);//Thêm thẻ i.far.fa-edit vào trong thẻ div.float-right
+        }
+
+        function clearItems() {
+            var getAllElement = document.querySelectorAll("#form .row");
+            for (var i = 0; i < getAllElement.length; i++) {
+                getAllElement[i].remove();
+            }
+        }
+        function deleteItem(idItem) {
+            var getIdItem = document.getElementById(idItem);
+            getIdItem.parentElement.remove();
+
+        }
+        function editItem(idItem) {
+            var getIdItem = document.getElementById(idItem);
+            var getName = document.querySelector("input.set-name");
+            getName.value = getIdItem.innerText;
+            deleteItem(idItem);
+        }
+    </script>
+</body>
+
+</html>

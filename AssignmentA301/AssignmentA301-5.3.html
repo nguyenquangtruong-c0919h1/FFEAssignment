@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <pre>
+    <script>
+        var users = [
+            { id: 1, first_name: "Eamon", last_name: "Harhoff", email: "eharhoff0@imageshack.us", gender: "Male", age: 76, salary: 18888 },
+            { id: 2, first_name: "Laney", last_name: "Whittam", email: "lwhittam1@issuu.com", gender: "Female", age: 42, salary: 15018 },
+            { id: 3, first_name: "Lynett", last_name: "Twinberrow", email: "ltwinberrow2@gov.uk", gender: "Female", age: 99, salary: 13343 }
+        ];
+
+        var filterUsers = users.filter(function (users) {
+            return users.gender == "Male" && users.age < 80;
+        })
+        for (var user of filterUsers) {
+            document.writeln("<br>");
+            document.writeln("Id:" + user.id);
+            document.writeln("First Name :" + user.first_name);
+            document.writeln("Last Name :" + user.last_name);
+            document.writeln("Email :" + user.email);
+            document.writeln("Email :" + user.email);
+            document.writeln("Gender :" + user.gender);
+            document.writeln("Age :" + user.age);
+            document.writeln("Salary :" + user.salary);
+            document.writeln("----------------------")
+        }
+
+        var reduceUsers = users.reduce((accumulator, user) => {
+            return (accumulator + user.age);
+        }, 0);
+
+        document.writeln("Tuoi trung binh cua cac user la :" + reduceUsers / users.length);
+
+
+    </script>
+    </pre>
+</body>
+
+</html>

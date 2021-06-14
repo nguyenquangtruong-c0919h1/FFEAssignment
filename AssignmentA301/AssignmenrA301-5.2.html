@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssignmentA301-5.2</title>
+</head>
+
+<body>
+    <script>
+        displayInfo(inputData());
+        
+        function inputData() {
+            var info = new Array();
+            var name;
+            var birthday;
+            var sex;
+            var loop = false;
+            name = prompt("Nhập họ và tên :");
+            info.push(name);
+            do {
+                loop = false;
+                birthday = prompt("Nhập ngày sinh: ");
+                if (isNaN(Date.parse(birthday))) {
+                    loop = true;
+                }
+            } while (loop);
+            info.push(birthday);
+
+            do {
+                loop = true;
+                sex = prompt("Nhập giới tính:");
+                if ("Nam" == sex || "Nu" == sex || "Nữ" == sex || "nam" == sex || "nu" == sex || "nữ" == sex) {
+                    loop = false;
+                }
+            } while (loop);
+            info.push(sex);
+
+            return info;
+        }
+
+        function displayInfo(info){
+            document.writeln("Tên:" + info[0]);
+            document.writeln("Ngày sinh:" + info[1]);
+            document.writeln("Giới tính:" + info[2]);
+        }
+    </script>
+</body>
+
+</html>

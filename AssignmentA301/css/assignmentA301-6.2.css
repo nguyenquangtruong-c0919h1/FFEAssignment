@@ -1,0 +1,18 @@
+/* .name input{
+    width: 100%;
+} */
+
+.todo-item {
+    margin-top: 1em;
+}
+
+button {
+    border: 0;
+    color: rgb(0, 110, 255);
+    background-color: white;
+    margin-left: 2em;
+}
+
+button.btn-remove-icon{
+    margin-left: 20px;
+}
