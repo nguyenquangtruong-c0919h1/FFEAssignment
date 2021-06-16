@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/assignmentA302-7.3.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="js/all.js">
+
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="jQuery/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form class="form" id="form" onsubmit="return validateForm()">
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="text-center">Personal Info</h1>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">First Name</label>
+                                <input type="text" id="first-name" class="form-control" placeholder="First Name">
+                                <span class="error-first-name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" id="email" class="form-control" placeholder="Email">
+                                <span class="error-email"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <input type="text" id="last-name" class="form-control" placeholder="Last Name">
+                                <span class="error-last-name"></span>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input type="text" id="phone" class="form-control" placeholder="Phone">
+                                <span class="error-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <label for="">Address</label>
+                            <input type="text" id="address" class="form-control" placeholder="1234 Main St">
+                            <span class="error-address"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label for="">City</label>
+                            <input type="text" id="city" class="form-control" placeholder="New York">
+                            <span class="error-city"></span>
+
+                        </div>
+                        <div class="col-3 form-group">
+                            <label for="">State</label>
+                            <select name="" id="state" class="form-select form-control ">
+                                <option selected>Choose...</option>
+                                <option value=" CA">California</option>
+                                <option value="Texas">Texas</option>
+                            </select>
+                        </div>
+                        <div class="col-3 form-group">
+                            <label for="">Zip Code</label>
+                            <input type="text" id="zip-code" class="form-control">
+                            <span class="error-zip-code"></span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h1>Payment Info</h1>
+                    <div class="form-group">
+                        <label for="">Name On Card</label>
+                        <input type="text" id="name-on-card" class="form-control" placeholder="John More Doe">
+                        <span class="error-name-on-card"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Create card number</label>
+                        <input type="text" id="card-number" class="form-control" onkeyup="addStrikeThrough()"
+                            placeholder="1111-2222-3333-4444">
+                        <span class="error-card-number"></span>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="">Exp Month</label>
+                            <input type="text" id="exp-month" class="form-control" placeholder="07">
+                            <span class="error-exp-month"></span>
+
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Exp Year</label>
+                            <input type="text" id="exp-year" class="form-control" placeholder="2018">
+                            <span class="error-exp-year"></span>
+
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="352">
+                            <span class="error-cvv"></span>
+
+                        </div>
+                    </div>
+                    <label for="">Accepted Cards</label>
+                    <div class="icon">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-discover"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-check col-12 ml-3">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Check me out
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+        </form>
+    </div>
+    <script>
+        var check = false;
+        var regex_string = /^[a-zA-Z]{1,}$/;
+        var regex_phone = /^(09|03|02|08)[0-9]{8}$/;
+        var regex_zip_code = /^[0-9]{5}$/;
+        var regex_cvv = /^[0-9]{3}$/;
+        var regex_email = /^[a-zA-Z0-9]+@fsoft.com.vn$/
+        var regex_card_number = /^([0-9]{4})+\-([0-9]{4})+\-([0-9]{4})$/;
+        var regex_exp_month = /^[0-9]{1,2}$/;
+        var regex_exp_year = /^[0-9]{4}$/;
+
+        function validate(nameRegex, id) {
+            check = false;
+            if (!nameRegex.test($("#" + id).val())) {
+                $("span.error-" + id).text("Nhập sai định dạng");
+                $("span.error-" + id).attr("class", "error-" + id + " alert alert-danger");
+            } else {
+                $("span.error-" + id).removeClass("alert alert-danger");
+                $("span.error-" + id).text("");
+                check = true;
+            }
+            return check;
+        }
+
+        function validateExpMonth(id) {
+            check = false;
+            if ($("#" + id).val() <= 0 || $("#" + id).val() >= 13 || !regex_exp_month.test($("#" + id).val())) {
+                $("span.error-" + id).text("Nhập sai định dạng");
+                $("span.error-" + id).attr("class", "error-" + id + " alert alert-danger");
+            } else {
+                $("span.error-" + id).removeClass("alert alert-danger");
+                $("span.error-" + id).text("");
+                check = true;
+            }
+            return check;
+        }
+
+        function validateExpYear(id) {
+            check = false;
+            if ($("#" + id).val() <= 2022 || $("#" + id).val() >= 2000 || !regex_exp_year.test($("#" + id).val())) {
+                $("span.error-" + id).text("Nhập sai định dạng");
+                $("span.error-" + id).attr("class", "error-" + id + " alert alert-danger");
+            } else {
+                $("span.error-" + id).removeClass("alert alert-danger");
+                $("span.error-" + id).text("");
+                check = true;
+            }
+            return check;
+        }
+        function addStrikeThrough() {
+            var getNameCard = $("#card-number").val();
+            if (getNameCard.length == 4 || getNameCard.length == 9) {
+                $("#card-number").val($("#card-number").val() + "-");
+            }
+
+        }
+
+        function validateForm() {
+            check = true;
+            if (validate(regex_string, "first-name")) {
+                check = false;
+            }
+            if (validate(regex_string, "last-name")) {
+                check = false;
+            }
+            if (validate(regex_string, "address")) {
+                check = false;
+            }
+            if (validate(regex_string, "city")) {
+                check = false;
+            }
+            if (validate(regex_string, "name-on-card")) {
+                check = false;
+            }
+            if (validate(regex_phone, "phone")) {
+                check = false;
+            }
+            if (validate(regex_zip_code, "zip-code")) {
+                check = false;
+            }
+            if (validate(regex_cvv, "cvv")) {
+                check = false;
+            }
+            if (validate(regex_email, "email")) {
+                check = false;
+            }
+            if (validate(regex_card_number, "card-number")) {
+                check = false;
+            }
+            if (validateExpMonth("exp-month")) {
+                check = false;
+            }
+            if (validateExpYear('exp-year')){
+                check = false;
+            }
+                return check;
+        }
+
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
