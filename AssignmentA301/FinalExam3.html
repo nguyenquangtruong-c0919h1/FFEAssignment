@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/all.js"></script>
+
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/finalExam.js"></script>
+</head>
+
+<body>
+    <form id="form" action="">
+        <span class="alert"></span>
+        <div class="form-group">
+            <label for="">Tên Cầu thủ</label>
+            <input type="text" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <span class="message-delete"></span>
+    <table class="table" style="display:none">
+        <thead>
+            <tr>
+                <th class="col">Tên cầu thủ</th>
+                <th class="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        var regex_string = /^[a-zA-Z]{5,}$/;
+        var check = false;
+        var idName = 0;
+        $("#form").on("submit", function (e) {
+            e.preventDefault();
+            if (validateName()) {
+                $("span.alert").text("Thêm thành công");
+                $("span.alert").attr("class", "alert-success");
+                window.setTimeout(function () {
+                    $(".alert-success").text("");
+                    $(".alert-success").attr("class", "alert");
+                }, 3000);
+                check = true;
+            } else {
+                $("span.alert").text("Thêm thất bại");
+                $("span.alert").attr("class", "alert-danger");
+                window.setTimeout(function () {
+                    $(".alert-danger").text("");
+                    $(".alert-danger").attr("class", "alert");
+                }, 3000);
+
+                check = false;
+            }
+            if (check == true) {
+                idName++;
+                $("table").css("display", "block");
+                $("tbody").append("<tr class=" + idName + "><td id='name-" + idName + "'>" + $("input").val() + "</td><td><button onclick='deleteItem(" + idName + ")'>Xóa</button></td></tr>");
+            }
+
+
+        });
+        function deleteItem(id) {
+            $("#name-" + id).parent().remove();
+            if (($("tbody tr").length == 0)) {
+                $(".message-delete").text("Đã xóa hết");
+                window.setTimeout(function () {
+                    $(".message-delete").text("");
+                }, 3000);
+            }
+        }
+        function validateName() {
+            if (regex_string.test($("input").val())) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+
+</body>
+
+</html>

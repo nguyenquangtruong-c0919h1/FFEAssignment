@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/all.js"></script>
+
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/finalExam.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form action="" id="form">
+            <div class="form-group">
+                <label for="">Họ và tên</label>
+                <input id="name" type="text" class="form-control">
+                <span class="error-name"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Giới tính</label>
+                <input id="sex" type="text" class="form-control">
+                <span class="error-sex"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Ngày sinh</label>
+                <input id="birthday" type="text" class="form-control">
+                <span class="error-birthday"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Chiều cao</label>
+                <input id="height" type="text" class="form-control">
+                <span class="error-height"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Cân nặng</label>
+                <input id="weight" type="text" class="form-control">
+                <span class="error-weight"></span>
+            </div>
+            <button text="submit">Kiểm tra tình hình sức khỏe</button>
+        </form>
+        <div class="show-info">
+            <span class="name"></span>
+            <span class="sex"></span>
+            <span class="birthday"></span>
+            <span class="weight"></span>
+            <span class="height"></span>
+            <span class="age"></span>
+            <span class="bmi"></span>
+        </div>
+    </div>
+    <script>
+        var regex_name = /^[a-zA-Z]{5,}$/;
+        var regex_number = /^[0-9]{1,}$/;
+        var regex_number_float = /^([0-9]*[.])?[0-9]+$/;
+        var regex_day = /^(0[1-9]{1}|[1-2]{1}[0-9]{1}|3[0-1]{1})$/;
+        var regex_month = /^(0[1-9]{1}|1[0-2]{1})$/;
+        var regex_year = /^(19[0-9]{1}[0-9]{1}|20[0-2]{1}[0-9]{1})$/;
+        var age;
+        var check = true;
+        $("#form").on("submit", function (e) {
+            e.preventDefault();
+            check = true;
+            if (!isName("name")) {
+                check = false;
+            }
+            if (!isSex("sex")) {
+                check = false;
+            }
+            if (!isBirthDay("birthday")) {
+                check = false;
+            }
+            if (!isWeight("weight")) {
+                check = false;
+            }
+            if (!isHeight("height")) {
+                check = false;
+            }
+            if (check == true) {
+                var getDate = new Date;
+
+                var getYearBirthday = $("#birthday").val().split("/");
+                age = (getDate.getFullYear() - parseInt(getYearBirthday[2]));
+                $(".show-info .name").text("Họ và tên : " + $("#name").val());
+                $(".show-info .sex").append("Giới tính : " + $("#sex").val());
+                $(".show-info .birthday").append("Ngày sinh : " + $("#birthday").val());
+                $(".show-info .height").append("Chiều cao : " + $("#height").val());
+                $(".show-info .weight").append("Cân nặng : " + $("#weight").val());
+                $(".show-info .age").append("Tuổi : " + age);
+            }
+            if (age >= 20) {
+                bmi();
+            }
+            return check;
+        });
+
+        function bmi() {
+            var getWeight = $("#weight").val();
+            var getHeight = $("#height").val();
+            var bmi = getWeight / (getHeight * getHeight);
+            if (bmi < 18.5) {
+                $(".show-info .bmi").text("Gầy");
+            } else if (bmi >= 18.5 && bmi < 22.9) {
+                $(".show-info .bmi").text("Bình thường");
+            } else if (bmi >= 22.9) {
+                $(".show-info .bmi").text("Thừa cân");
+                if (bmi >= 23 && bmi < 24.9) {
+                    $(".show-info .bmi").text("<span>Tiền béo phì</span>");
+                } else if (bmi >= 2253 && bmi < 29.9) {
+                    $(".show-info .bmi").text("<span>Béo phì độ I</span>");
+                } else {
+                    $(".show-info .bmi").html("<span>Béo phì độ II</span>");
+                }
+            }
+        }
+
+
+        function isName(id) {
+            if (!regex_name.test($("#" + id).val())) {
+                $(".error-" + id).text("Vui lòng nhập đúng định dạng tên");
+                return false;
+            }
+            $(".error-" + id).text("");
+            return true;
+        }
+
+        function isSex(id) {
+            var getSex = $("#" + id).val();
+            if ((getSex == "Nam") || (getSex == "Nữ") || (getSex == "3D")) {
+                $(".error-" + id).text("");
+                return true;
+            }
+            $(".error-" + id).text("Vui lòng nhập đúng định dạng giới tính");
+            return false;
+        }
+
+        function isBirthDay(id) {
+            var getBirthday = $("#" + id).val();
+            var arrBirthday = getBirthday.split("/");
+            if (!regex_day.test(arrBirthday[0])) {
+                $(".error-" + id).text("Vui lòng nhập đúng định dạng ngày sinh");
+                return false;
+            }
+            if (!regex_month.test(arrBirthday[1])) {
+                $(".error-" + id).text("Vui lòng nhập đúng định dạng ngày sinh");
+                return false;
+            }
+            if (!regex_year.test(arrBirthday[2])) {
+                $(".error-" + id).text("Vui lòng nhập đúng định dạng ngày sinh");
+                return false;
+            }
+            $(".error-" + id).text("");
+            return true;
+        }
+        function isWeight(id) {
+            var getWeight = $("#" + id).val();
+            if (regex_number.test(getWeight) && parseInt(getWeight) > 0) {
+                $(".error-" + id).text("");
+                return true;
+            }
+            $(".error-" + id).text("Vui lòng nhập đúng định dạng Cân nặng(kg)");
+            return false;
+        }
+        function isHeight(id) {
+            var getHeight = $("#" + id).val();
+            if (regex_number_float.test(getHeight) && parseFloat(getHeight) > 0 && parseFloat(getHeight) < 3) {
+                $(".error-" + id).text("");
+                return true;
+            }
+            $(".error-" + id).text("Vui lòng nhập đúng định dạng chiều cao(kg)");
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>

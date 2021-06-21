@@ -1,0 +1,27 @@
+.height-100 {
+    height: 100px;
+}
+
+.height-80 {
+    height: 80px;
+}
+
+.bg-gray {
+    background-color: #aeaaaa ;
+}
+
+.bg-yellow {
+    background-color: #fcebb8 ;
+}
+
+.container {
+    width: 90% !important;
+}
+
+.col-12.col-lg-6 {
+    height: 100%;
+}
+
+button:hover {
+    background-color: rgb(1, 247, 1);
+}

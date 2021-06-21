@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <script src="js/all.js"></script>
+
+    <script src="jQuery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div class="row mt-3">
+                <div class="col-4 form-group">
+                    <label for="">Chọn giải đấu V.League</label>
+                    <select class="form-control" name="" id="VLeague">
+                        <option value="All">---Chọn giải đấu---</option>
+                        <option value="VLeague1">---V.League1---</option>
+                        <option value="VLeague2">---V.League2---</option>
+                    </select>
+                </div>
+                <div class="col-4 form-group">
+                    <label for="">Chọn Câu lạc bộ (FC)</label>
+                    <select class="form-control" name="" id="FC">
+                        <option value="">---Chọn FC---</option>
+                        <option value="V1BinhDuong">---V1 Becamex Bình Dương---</option>
+                        <option value="V1DongAThanhHoa">---V1 Đông Á Thanh Hóa---</option>
+                        <option value="V1HaNoi">---V1 Hà Nội---</option>
+                        <option value="V1HaiPhong">---V1 Hải Phòng---</option>
+                        <option value="V1HAGL">---V1 Hoàng Anh Gia Lai---</option>
+                        <option value="V1HaTinh">---V1 Hồng Lĩnh Hà Tĩnh---</option>
+                        <option value="V1NamDinh">---V1 Nam Định---</option>
+                        <option value="V1DaNang">---V1 SHB Đà Nẵng---</option>
+                        <option value="V2SLNG">---V2 Sông Lam Nghệ An---</option>
+                        <option value="V2QuangNinh">---V2 Than Quảng Ninh---</option>
+                        <option value="V2BinhDinh">---V2 Bình Định---</option>
+                        <option value="V2Viettel">---V2 Viettel---</option>
+                    </select>
+                </div>
+                <div class="col-4 form-group">
+                    <label for="">Nhập tên cầu thủ</label>
+                    <input class="form-control" type="text" placeholder="Nhập tên cầu thủ">
+                </div>
+            </div>
+            <button class="btn btn-danger">Add Cầu thủ</button>
+        </form>
+
+    </div>
+    <script>
+
+        $("#VLeague").on("change", function () {
+            if ($("#VLeague").val() == "VLeague1") {
+                $("#FC option").each(function () {
+                    if (!$(this).val().startsWith("V1")) {
+                        $(this).css("display", "none");
+                    } else {
+                        $(this).css("display", "block");
+                    }
+                });
+            }
+            if ($("#VLeague").val() == "VLeague2") {
+                $("#FC option").each(function () {
+                    if (!$(this).val().startsWith("V2")) {
+                        $(this).css("display", "none");
+                    } else {
+                        $(this).css("display", "block");
+                    }
+                });
+            }
+            if ($("#VLeague").val() == "All") {
+                $("#FC option").each(function () {
+                    $(this).css("display", "block");
+                });
+            }
+        })
+    </script>
+
+</body>
+
+
+</html>
